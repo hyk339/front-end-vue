@@ -71,6 +71,15 @@ const routes = [
     name: "menu01_exam07view",
     component: () => import(/* webpackChunkName: "menu01" */ '../views/menu01/Exam07View'),
     props: {kind:"freeboard",color:"blue"}
+  },
+  {
+    path: "/menu01/exam08view",
+    name: "menu01_exam08view",
+    component: () => import(/* webpackChunkName: "menu01" */ '../views/menu01/Exam08View'),
+    props: (route) => ({
+      kind: route.query.kind,
+      color: route.query.color
+    })
   }
 ]
 

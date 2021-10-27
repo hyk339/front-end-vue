@@ -18,6 +18,14 @@
        <ul>
         <li><router-link to="/menu01/exam07view">exam07view</router-link></li>
        </ul>
+     
+      <h6>쿼리 스트링으로 전달</h6>
+       <ul>
+        <li><router-link to="/menu01/exam08view?kind=freeboard&color=blue">exam08view?kind=freeboard&color=blue</router-link></li>
+        <li><router-link :to="`/menu01/exam08view?kind=${kind1}&color=${color1}`">exam08view?kind=freeboard&color=blue</router-link></li>
+         <li><router-link :to="{path: `/menu01/exam08view?kind=${kind2}&color=${color2}`}">exam08view?kind=album&color=red</router-link></li>
+         <li><router-link :to="{name: 'menu01_exam08view', query:{kind:kind3, color:color3}}">exam08view?kind=qa&color=yellow</router-link></li>
+       </ul>
     </div>
   </div>
 </template>
@@ -35,7 +43,13 @@ export default {
     return {
       bno1: 3,
       bno2: 5,
-      bno3: 7
+      bno3: 7,
+      kind1: "freeboard",
+      color1: "blue",
+      kind2: "album",
+      color2: "red",
+      kind3: "qa",
+      color3: "yellow",
     }
   },
   //컴포넌트에서 사용하는 메서드
