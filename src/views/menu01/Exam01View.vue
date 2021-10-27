@@ -11,17 +11,23 @@
       <router-link v-bind:to="`/menu01/exam02view`" class="btn btn-info btn-sm mr-2">/menu01/exam02view</router-link>
       <router-link :to="{path: `/menu01/exam02view`}" class="btn btn-info btn-sm mr-2">/menu01/exam02view</router-link>
       <router-link :to="{name: 'menu01_exam02view'}" class="btn btn-info btn-sm mr-2">/menu01/exam02view</router-link>
+    
+
+    
+    
     </div>
   </div>
 </template>
 
 <script>
+
+
 export default {
   //컴포넌트의 대표이름(devtools에 나오는 이름)
   name: "Exam01View",
   //추가하고 싶은 컴포넌트를 등록
   components:{
-
+   
   },
   //컴포넌트에서 사용하는 데이터를 정의
   data: function(){
