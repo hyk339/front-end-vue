@@ -27,6 +27,20 @@ const routes = [
     path: "/menu01/exam02view",
     name: "menu01_exam02view",
     component: () => import(/* webpackChunkName: "menu01" */ '../views/menu01/Exam02View/index.vue')
+  },
+  {
+    path: "/menu01/exam03view",
+    component: () => import(/* webpackChunkName: "menu01" */ '../views/menu01/Exam03View'),
+     children: [
+      {
+        path: "subacomponent",
+        component: () => import(/* webpackChunkName: "menu01" */ '../components/menu01/SubAComponent')
+      },
+      {
+        path: "subbcomponent",
+        component: () => import(/* webpackChunkName: "menu01" */ '../components/menu01/SubBComponent')
+      }
+    ]
   }
 ]
 

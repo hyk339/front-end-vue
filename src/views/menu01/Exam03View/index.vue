@@ -6,18 +6,20 @@
     </div>
     <div class="card-body">
       <div>
-        <h6>선언적 방식 컴포넌트 전환</h6>
-        <router-link to="/menu01/exam03view/subacomponent" class="btn btn-info btn-sm">SubAComponent</router-link
-        >
-        <router-link to="/menu01/exam03view/subbcomponent" class="btn btn-info btn-sm">SubBComponent</router-link
-        >
-        <h6>프로그램 방식 컴포넌트 전환</h6>
+        <h6>선언적 방식 화면 이동</h6>
+        <router-link to="/menu01/exam03view/subacomponent" class="btn btn-info btn-sm mr-2">SubAComponent</router-link>
+        <router-link to="/menu01/exam03view/subbcomponent" class="btn btn-info btn-sm">SubBComponent</router-link>
+        
+        <h6 class="mt-2">프로그램 방식 화면 이동</h6>
+        <button @click="goUrl('a')" class="btn btn-info btn-sm mr-2">SubAComponent</button>
+        <button @click="goUrl('b')" class="btn btn-info btn-sm mr-2">SubBComponent</button>
       </div>
 
       <div class="mt-2">
         <!-- URL이 뭐가되었건 내용이 아래에 들어가도록 하겠다. -->
         <router-view></router-view>
     </div>
+  </div>
   </div>
 </template>
 
@@ -32,7 +34,12 @@ export default {
     return {};
   },
   //컴포넌트에서 사용하는 메서드
-  methods: {},
+  methods: {
+    goUrl(kind){
+      this.$router.push(`/menu01/exam03view/sub${kind}component`)
+      .catch(()=>{});
+    }
+  },
 };
 </script>
 
