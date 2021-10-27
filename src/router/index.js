@@ -41,6 +41,20 @@ const routes = [
         component: () => import(/* webpackChunkName: "menu01" */ '../components/menu01/SubBComponent')
       }
     ]
+  },
+  {
+    path: "menu01/exam04view",
+    component: () => import(/* webpackChunkName: "menu01" */ '../views/menu01/Exam04View'),
+    children: [
+      {
+        path: "",
+        components:{
+          default:() => import(/* webpackChunkName: "menu01" */ '../components/menu01/SubAComponent'),
+          rv1:() => import(/* webpackChunkName: "menu01" */ '../components/menu01/SubBComponent'),
+          rv2: () => import(/* webpackChunkName: "menu01" */ '../components/menu01/SubCComponent')
+        }
+      }
+    ]
   }
 ]
 
