@@ -2,7 +2,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      Exam08View
+      <span class="title">Exam08View</span>
     </div>
     <div class="card-body">
       <div>kind: {{$route.query.kind}}</div>

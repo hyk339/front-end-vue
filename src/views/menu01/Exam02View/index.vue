@@ -2,7 +2,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      Exam02View
+      <span class="title">Exam02View</span>
     </div>
     <div class="card-body">
       <!-- 아래에 subAComponent가 들어간다. -->
