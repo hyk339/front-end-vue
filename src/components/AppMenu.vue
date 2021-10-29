@@ -21,6 +21,7 @@
       <router-link to="/menu02/exam04formbinding" class="nav-link text-warning">양방향 바인딩</router-link>
       <router-link to="/menu02/exam05forrepeatbinding" class="nav-link text-warning">반복 바인딩</router-link>
       <router-link to="/menu02/exam06fcomputedbinding" class="nav-link text-warning">계산된 바인딩</router-link>
+      <router-link to="/menu02/exam07template" class="nav-link text-warning">템플릿 컴포넌트</router-link>
     </li>
   </ul>
 </template>

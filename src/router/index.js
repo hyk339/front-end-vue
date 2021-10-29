@@ -104,6 +104,10 @@ const routes = [
   {
     path: "/menu02/exam06fcomputedbinding",
     component: () => import(/* webpackChunkName: "menu02" */ '../views/menu02/Exam06ComputedBinding')
+  },
+  {
+    path: "/menu02/exam07template",
+    component: () => import(/* webpackChunkName: "menu02" */ '../views/menu02/Exam07Template')
   }
 ]
 
