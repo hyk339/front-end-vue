@@ -7,7 +7,7 @@
     <div class="card-body">
       <h6>범위 반복</h6>
       <span v-for="n in 10" :key="n" class="mr-2">
-        <img :src="require(`@/assets/photos/photo${n}.jpg`)" height="150"/>
+        <img :src="require(`@/assets/photos/photo${n}.jpg`)" height="150" v-if="n%2===0"/>
       </span>
 
       <hr/>
@@ -15,7 +15,7 @@
       <h6>배열 항목 반복</h6>
       <div>
         <span v-for="(photo, index) in photos" :key="index">
-          <img :src="require(`@/assets/photos/${photo}`)" height="150"/>
+          <img :src="require(`@/assets/photos/${photo}`)" height="150" v-if="index<=2"/>
         </span>
       </div>
 
@@ -32,6 +32,7 @@
             </tr>
           </thead>
           <tbody>
+
             <tr v-for="board in boards" :key="board.bno">
               <td>{{board.bno}}</td>
               <td>{{board.btitle}}</td>
@@ -39,6 +40,7 @@
               <td>{{board.bdate}}</td>
             </tr>
           </tbody>
+
       </table>
 
 
@@ -61,7 +63,7 @@ export default {
       boards: [
         {bno:1, btitle:"제목1", bwriter:"글쓴이1", bdate:"2021-08-07"},
         {bno:2, btitle:"제목2", bwriter:"글쓴이2", bdate:"2021-08-08"},
-        {bno:3, btitle:"제목3", bwriter:"글쓴이3", bdate:"2021-08-09"}
+        {bno:3, btitle:"제목3", bwriter:"글쓴이2", bdate:"2021-08-09"}
       ],
       board: {
         bno:4,
