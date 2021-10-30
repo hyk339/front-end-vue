@@ -55,7 +55,7 @@ export default {
         company: "한섬",
         price: 100000
       },
-      bgRed : ""
+      bgColor : ""
     };
   },
   //컴포넌트에서 사용하는 메서드
@@ -75,6 +75,8 @@ export default {
       console.log("oldValue: ", oldValue);
       console.log("this.userId: ", this.userId);
     },
+
+     
     product: {
       deep: true,
       handler(newValue, oldValue){
@@ -82,6 +84,15 @@ export default {
         console.log("oldValue: ", oldValue);
       }
     },
+    /*    
+    //아래처럼 작성하면 객체 안에 데이터가 변경 된 부분에 대해서 감시가 안된다.
+    product(newValue,oldValue){
+      console.log("newValue :", newValue);
+      console.log("oldValue :", oldValue);
+      console.log("this.oldValue :", this.oldValue);
+
+    },
+    */ 
     "product.name"(newValue, oldValue){
       console.log("newValue: ", newValue);
       console.log("oldValue: ", oldValue);
@@ -96,6 +107,7 @@ export default {
         this.bgColor = "bg-primary";
       }
     }
+    
   }
 };
 </script>
