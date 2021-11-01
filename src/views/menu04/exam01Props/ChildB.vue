@@ -7,7 +7,7 @@
     <div class="card-body">
       <p>product.no: {{product.no}}</p>
       <p>product.kind: {{product.kind}}</p>
-      <p>product.kind: {{no}}</p>
+      <p>product.no: {{no}}</p>
       <p>product.kind: {{kind}}</p>
     </div>
   </div>
