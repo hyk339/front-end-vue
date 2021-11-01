@@ -2,5 +2,9 @@ export default[
   {
     path: "/menu04/exam01props",
     component: () => import(/* webpackChunkName: "menu04" */ '../views/menu04/exam01Props')
+  },
+  {
+    path: "/menu04/exam02eventemit",
+    component: () => import(/* webpackChunkName: "menu04" */ '../views/menu04/exam02EventEmit')
   }
 ]
