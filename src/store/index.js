@@ -1,6 +1,7 @@
 import Vue from 'vue' //vue 모듈을 가져온다.
 import Vuex from 'vuex' //vuex모듈을 가져온다.
 
+import counter from "./counter";
 
 Vue.use(Vuex) //vue에서 사용되도록한다.
 
@@ -45,6 +46,6 @@ export default new Vuex.Store({
   },
   //루트가 아닌 자식 상태를 정의한 모듈을 가져오기
   modules: {
-
+    counter
   }
 })

@@ -42,6 +42,7 @@
     <li class="nav-item mt-2">
       <h6 class="text-white">Menu06: Vuex State Management</h6>
       <router-link to="/menu06/exam01rootstate" class="nav-link text-warning">루트 상태 읽기 및 변경</router-link>
+      <router-link to="/menu06/exam02counterstate" class="nav-link text-warning">하위 상태 읽기 및 변경</router-link>
     </li>
   </ul>
 </template>
