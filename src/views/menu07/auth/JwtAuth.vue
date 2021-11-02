@@ -81,18 +81,16 @@ export default {
          this.alertDialog = true; //dialog를 띄운다.
 
          const response = await auth.join(this.user);
-         console.log(response);
          this.loading = false;
          if(response.data.result === "success"){
            this.alertDialogMessage = `회원 가입 성공`;
          } else if(response.data.result === "duplicated"){
-           this.alertDialogMessage = "아이디가 중복됨";
+           throw {message:"아이디가 중복됨"};
          } else if(response.data.result === "fail"){
-           this.alertDialogMessage = "회원 가입 실패";
+           throw {message:"서버측 오류가 있음"}; //javascript 문법이다.
          }
         //
       } catch(error){ //
-        console.log(error);
         this.loading = false;
         this.alertDialogMessage = `회원 가입 실패 : ${error.message}`;
       }
