@@ -6,7 +6,33 @@
     </div>
     <div class="card-body">
       <div class="card">
-        <div class="card-header">
+        
+          <div class="card-header">
+            JWT 인증
+          </div>
+          <div class="card-body">
+              <!-- userid가 있을 때-->
+              <div v-if="$store.state.userId === ''">
+                <div class="form-group">
+                  <label class="form-label">User ID</label>
+                  <input type="text" class="form-control" id="userId" v-model="user.id"/>
+                </div>
+                <div class="form-group">
+                  <label for="userPassword" class="col-form-label">User Password</label>
+                  <input type="text" class="form-control" v-model="user.password"/>
+                </div>
+                <button class="btn btn-info btn-sm" v-on:click="handleLogin">로그인</button>
+              </div>
+              <!-- userid가 없을 때-->
+              <div v-if="$store.state.userId !== ''">
+                <button class="btn btn-info btn-sm mr-2" v-on:click="handleLogout">로그아웃</button>
+              </div>
+          </div>
+        
+
+
+
+        <div class="card-header mt-5">
           회원 가입
         </div>
         <div class="card-body">
@@ -36,7 +62,10 @@
           </div>
           <button class="btn btn-info btn-sm" v-on:click="handleJoin">가입</button>
         </div>
-      </div>   
+      </div>
+
+    
+
     </div>
 
     <alert-dialog :message="alertDialogMessage"
@@ -94,6 +123,33 @@ export default {
         this.loading = false;
         this.alertDialogMessage = `회원 가입 실패 : ${error.message}`;
       }
+    },
+
+    async handleLogin(){
+      try{
+        const response = await auth.login(this.user);
+        this.$store.dispatch("saveAuth",{
+          userId: response.data.mid,
+          authToken: response.data.jwt
+
+        });
+      } catch(error){ //
+        //console.log(error.response);
+        //console.log(error.response.status);
+        try{
+          if(error.response.status === 401){
+            this.alertDialog = true;
+            this.alertDialogMessage = "로그인 실패(아이디 또는 패스워드가 틀림)";
+          }
+        } catch(err){
+          this.alertDialog = true;
+          this.alertDialogMessage = "로그인 실패(네트워크 에러)";
+        }
+      }
+    },
+
+    handleLogout(){
+      this.$store.dispatch("deleteAuth");
     }
   }
 };

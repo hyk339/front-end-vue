@@ -31,6 +31,9 @@ export default {
   components:{
     AppHeader :  AppHeader,
     AppMenu
+  },
+  created(){
+    this.$store.dispatch("loadAuth");
   }
 }
 </script>
