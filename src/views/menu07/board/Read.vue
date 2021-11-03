@@ -26,7 +26,7 @@
                 </a>
             </p>
           </div>
-          <div class="d-flex align-items-center ml-5">
+          <div class=" ml-5">
             <img v-bind:src="`${baseURL}/board/battach/${board.bno}?jwt=${$store.state.authToken}`" alt="" width="300"/>
           </div>
         </div>
@@ -63,8 +63,14 @@ export default {
   },
   //컴포넌트에서 사용하는 메서드
   methods: {
-    handleRemove(){
-
+    async handleRemove(){
+      try{
+        const response = await apiBoard.deleteBoard(this.board.bno);
+        console.log(response);
+        this.$router.push(`/menu07/board/list?pageNo=${this.$route.query.pageNo}`);
+      } catch(error){
+        console.log(error);
+      }
     }
   },
   //컴포넌트가 생성될 때 실행되는 Hook

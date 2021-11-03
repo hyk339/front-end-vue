@@ -78,6 +78,11 @@ export default {
   //컴포넌트에서 사용하는 메서드
   methods: {
     changePageNo(pageNo){
+      //같은 컴포넌트 내에서 URL만 변경
+      this.$router.push(`/menu07/board/list?pageNo=${pageNo}`).catch(()=>{});
+      //URL 변경을 감시하는 Watch에서 데이터 가져옴
+    },
+    getBoardList(pageNo){
       this.loading = true;
       this.alertDialog = true;
       board.getBoardList(pageNo)
@@ -115,7 +120,22 @@ export default {
     if(pageNo === "undefined"){
       pageNo = 1;
     }
-    this.changePageNo(pageNo);
+    this.getBoardList(pageNo);
+  },
+  watch: {
+    //브라우저의 백 버튼을 이용해서 URL이 변경되었을 때 데이터 갱신을 위해 $route 감시
+    $route(to, from){
+      //console.log("to:",to);
+      //console.log("pageNo:",to.query.pageNo);
+      //console.log("from:",from);
+
+      if(to.query.pageNo){
+        //URL을 감시하고 변경되면 해당 페이지 내용을 가져오기
+        this.getBoardList(to.query.pageNo);
+      } else{
+        this.getBoardList(1);
+      }
+    }
   }
 };
 </script>

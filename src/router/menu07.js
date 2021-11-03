@@ -19,4 +19,8 @@ export default[
     path: "/menu07/board/read",
     component: () => import(/* webpackChunkName: "menu06" */ '../views/menu07/board/Read.vue')
   },
+  {
+    path: "/menu07/board/updateForm",
+    component: () => import(/* webpackChunkName: "menu06" */ '../views/menu07/board/UpdateForm.vue')
+  },
 ]

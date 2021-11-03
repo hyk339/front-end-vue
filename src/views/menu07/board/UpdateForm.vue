@@ -2,76 +2,69 @@
 <template>
   <div class="card">
     <div class="card-header">
-      글쓰기
+      글 수정
     </div>
     <div class="card-body">
-      <form @submit.prevent="handleAdd">
+      <form v-if="board" v-on:submit.prevent="handleUpdate"> <!-- 네트워크 에러로 board가 생성안될수도 있다.-->
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">제목</label>
+          <label for="btitle" class="col-sm-2 col-form-label">제목</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" v-model="board.btitle"/>
+            <input type="text" class="form-control" id="btitle" v-model="board.btitle"/>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">내용</label>
+          <label for="bcontent" class="col-sm-2 col-form-label">내용</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" v-model="board.bcontent"/>
+            <input type="text" class="form-control" id="bcontent" v-model="board.bcontent"/>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">첨부그림</label>
+          <label for="battach" class="col-sm-2 col-form-label">첨부그림</label>
           <div class="col-sm-10">
-            <input type="file" class="form-control-file" ref="battach"/>
+            <input type="file" class="form-control-file" id="battach" ref="battach"/>
           </div>
         </div>
-        <div class="form-group row">
+        <div>
+            <img v-bind:src="`${baseURL}/board/battach/${board.bno}?jwt=${$store.state.authToken}`" alt="" width="200"/>
+        </div>
+        <div class="form-group row mt-3">
           <div class="col-sm-12 d-flex justify-content-center">
-            <input type="submit" class="btn btn-primary btn-sm mr-2" value="추가"/>
-            <input type="button" class="btn btn-primary btn-sm" value="취소" v-on:click="handleCancel"/>
+            <input type="submit" class="btn btn-info btn-sm mr-2" value="수정"/>
+            <input type="button" class="btn btn-info btn-sm" value="취소" v-on:click="handleCancel"/>
           </div>
         </div>
       </form>
     </div>
-
-    <alert-dialog v-if="alertDialog"
-                  :loading="loading"
-                  :message="alertDialogMessage"
-                  @close="alertDialog=false"/>
   </div>
 </template>
 
 <script>
-import apiBoard from "@/apis/board";
-import AlertDialog from "@/components/menu07/AlertDialog.vue"
+import axios from "axios";
+import apiBoard from "@/apis/board"
 
 export default {
   //컴포넌트의 대표이름(devtools에 나오는 이름)
-  name: "WriteForm",
+  name: "",
   //추가하고 싶은 컴포넌트를 등록
   components:{
-    AlertDialog
+
   },
   //컴포넌트에서 사용하는 데이터를 정의
   data() {
     return {
-      board:{
-        btitle: "",
-        bcontent: ""
-      },
-      loading : false,
-      alertDialog : false,
-      alertDialogMessage : "",
+      board: null,
+      baseURL : axios.defaults.baseURL
     };
   },
   //컴포넌트에서 사용하는 메서드
   methods: {
-    async handleAdd(){
-      try{
+    async handleUpdate(){
+       try{
         
         const multipartFormData = new FormData(); //FormData객체를 가져온다.
+        multipartFormData.append("bno",this.board.bno);
         multipartFormData.append("btitle",this.board.btitle);
         multipartFormData.append("bcontent",this.board.bcontent);
-        multipartFormData.append("mid",this.$store.state.userId); //상태로 mid가 저장되어잇다.
         const battach = this.$refs.battach;
         if(battach.files.length != 0){
           multipartFormData.append("battach", battach.files[0]);
@@ -79,13 +72,11 @@ export default {
 
         this.loading = true;
         this.alertDialog = true;
-        const response = await apiBoard.createBoard(multipartFormData);
+        const response = await apiBoard.updateBoard(multipartFormData);
         console.log(response);
         this.loading = false;
         this.alertDialog = false;
-        this.$router.push("/menu07/board/list");
-
-        console.log(response);
+        this.$router.push(`/menu07/board/read?bno=${this.$route.query.bno}&pageNo=${this.$route.query.pageNo}&hit=false`);
       }catch(error){
         if(error.response){
           if(error.response.status === 403){
@@ -99,10 +90,19 @@ export default {
         }
       }
     },
-    handleCancel(){ 
-      this.$router.push("/menu07/board/list");
-
+    handleCancel(){
+      this.$router.push(`/menu07/board/read?bno=${this.$route.query.bno}&pageNo=${this.$route.query.pageNo}&hit=false`);
     }
+  },
+  //컴포넌트가 생성된 후 실행되는 hook
+  created(){
+    apiBoard.readBoard(this.$route.query.bno, this.$route.query.hit)
+      .then(response => {
+        this.board = response.data;
+      })
+      .catch(error =>{
+        console.log(error);
+      });
   }
 };
 </script>

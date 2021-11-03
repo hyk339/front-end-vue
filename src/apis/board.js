@@ -14,10 +14,21 @@ function readBoard(bno, hit){
   return axios.get(`/board/${bno}`,{params:{hit}})
 }
 
+function updateBoard(multipartFormData){
+  //멀티파트 폼으로 보내는 것은 반드시 post만 된다.
+  //원래 업데이트는 put이나 patch가 된다.
+  return axios.post("/board/update", multipartFormData);
+}
+
+function deleteBoard(bno){
+  return axios.delete(`/board/${bno}`);
+}
 
 export default {
   //getBoardList : getBoardList
   getBoardList,
   createBoard,
-  readBoard
+  readBoard,
+  updateBoard,
+  deleteBoard
 }
