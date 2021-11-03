@@ -133,6 +133,7 @@ export default {
         //URL을 감시하고 변경되면 해당 페이지 내용을 가져오기
         this.getBoardList(to.query.pageNo);
       } else{
+        //PageNo가 없을 경우 기본 1페이지 내용을 가져오기
         this.getBoardList(1);
       }
     }
