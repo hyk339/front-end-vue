@@ -5,6 +5,8 @@
       게시물 목록
     </div>
     <div class="card-body">
+      <router-link class="btn btn-success btn-sm mb-2" to="/menu07/board/writeForm">생성</router-link>
+
       <div v-if="page != null">
         <table class="table table-sm table-striped table-bordered">
           <thead>
@@ -19,7 +21,8 @@
           <tbody>
             <tr v-for="board in page.boards" :key="board.bno">
               <td class="text-center" style="width:70px">{{board.bno}}</td>
-              <td>{{board.btitle}}</td>
+              <!-- 사용자가 볼때만 조회수를 추가하기위해서-->
+              <td><router-link :to="`/menu07/board/read?bno=${board.bno}&pageNo=${page.pager.pageNo}&hit=true`">{{board.btitle}}</router-link></td>
               <td class="text-center" style="width:90px">{{board.mid}}</td>
               <td class="text-center" style="width:120px">{{new Date(board.bdate).toLocaleDateString()}}</td>
               <td class="text-center" style="width:70px">{{board.bhitcount}}</td>
